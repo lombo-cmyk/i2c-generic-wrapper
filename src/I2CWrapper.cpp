@@ -1,14 +1,10 @@
 //
 // Created by Lukasz on 06.03.2022.
 //
-#include <memory>
-
 #include "I2CWrapper.hpp"
 #include "Logger.hpp"
 
-void I2CWrapper::ConfigureConnectionPins(int sdaPin,
-                                         int sclPin,
-                                         i2c_port_t i2cInterface) {
+void I2CWrapper::Init(int sdaPin, int sclPin, i2c_port_t i2cInterface) {
     i2cInterface_ = i2cInterface;
     connectionConfiguration_.mode = I2C_MODE_MASTER;
     connectionConfiguration_.sda_io_num = sdaPin;
@@ -55,7 +51,7 @@ void I2CWrapper::pingDevice(const smbus_info_t* busInfo,
         LogInfo(deviceName, "I2C communication established");
     } else {
         LogError(deviceName,
-                "I2C communication not established, error: ",
-                error);
+                 "I2C communication not established, error: ",
+                 error);
     }
 }

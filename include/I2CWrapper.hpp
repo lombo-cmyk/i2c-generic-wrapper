@@ -5,19 +5,20 @@
 #ifndef AIRCONTROLLER_I2CWRAPPER_HPP
 #define AIRCONTROLLER_I2CWRAPPER_HPP
 
+#include <memory>
 #include <unordered_map>
 
 #include "driver/i2c.h"
-#include "smbus.h"
 #include "Singleton.h"
+#include "smbus.h"
 
 class I2CWrapper final : public Singleton<I2CWrapper> {
 public:
     friend Singleton<I2CWrapper>;
 
-    void ConfigureConnectionPins(int sdaPin,
-                                 int sclPin,
-                                 i2c_port_t i2cInterface = I2C_NUM_0);
+    /* I2CWrapper should be initialized in main program, as many devices might
+     * need the bus  and the initialization is generic*/
+    void Init(int sdaPin, int sclPin, i2c_port_t i2cInterface = I2C_NUM_0);
     void AddDevice(uint8_t address, std::string_view friendlyName);
     void CheckCommunicationWithDevices();
 
