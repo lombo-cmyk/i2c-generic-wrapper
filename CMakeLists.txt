@@ -3,6 +3,8 @@
 
 set(CMAKE_CXX_STANDARD 17)
 
-idf_component_register(SRCS "src/I2CWrapper.cpp"
+idf_component_register(
+        SRCS "src/I2CWrapper.cpp"
         INCLUDE_DIRS "include"
-        REQUIRES esp32-smbus CppSingletonTemplate)
+        REQUIRES esp32-smbus CppSingletonTemplate
+        PRIV_REQUIRES esp-logger)
